@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-               git branch: 'main', url: 'https://github.com/srinfotechbatch3/spring-petclinic.git'
+               git branch: 'feature/2025.08.12', url: 'https://github.com/srinfotechbatch3/spring-petclinic.git'
             }
         }
         
