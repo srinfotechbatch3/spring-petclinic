@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+        stages{
+
+     stage('checkout clone'){
+                steps{
+                    git branch: 'feature/2026.01.29', credentialsId: 'Git ACCESS', url: 'https://github.com/thirumalarao-a/Petclinic.git'
+                  }
+                }
+         stage('bulid'){
+
+                 steps{
+                        sh 'mvn install'
+                    }
+           }
+             stage('test'){
+                    steps{
+                        sh 'mvn test'
+                    }
+                    }
+            stage('generate junit tests resulit'){
+
+                steps{
+
+                junit 'target/surefire-reports/*.xml'
+                
+            }
+        }
+         stage('generate the artificate'){
+
+                steps{
+
+                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+                
+            }
+        }
+    }
+}
